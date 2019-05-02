@@ -28,11 +28,13 @@ public class KanyeRestGame : MonoBehaviour
     
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space) && _DataReader._IsReady)
         {
             _UI.FadeQuote();
             _DataReader.BeginObtainQuote();
         }
+#endif
     }
 
     private void OnObtainQuoteSuccess(KanyeRestData data)
@@ -43,5 +45,14 @@ public class KanyeRestGame : MonoBehaviour
     private void OnObtainQuoteFailure(string error)
     {
         Debug.Log("Error: " + error);
+    }
+
+    public void OnButton_Kanye()
+    {
+        if (_DataReader._IsReady)
+        {
+            _UI.FadeQuote();
+            _DataReader.BeginObtainQuote();
+        }
     }
 }
